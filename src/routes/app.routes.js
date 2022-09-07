@@ -30,6 +30,7 @@ export default function AppRoutes(){
             <AppDrawer.Screen 
             name="Home"
             component={Home}
+            options={{headerShown: false}}
             />
 
             <AppDrawer.Screen

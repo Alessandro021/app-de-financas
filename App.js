@@ -18,6 +18,9 @@ console.disableYellowBox=true;
  * import 'react-native-gesture-handler';
  * }
  * 
+ * => icons
+ * expo install react-native-vector-icons
+ * 
  */
 
 export default function App() {

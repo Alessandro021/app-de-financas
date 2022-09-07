@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import { AuthContext } from '../../contexts/auth';
 import { useNavigation } from '@react-navigation/native';
+import Header from '../../components/Header';
 
 export default function Profile() {
 
@@ -10,6 +11,8 @@ export default function Profile() {
   const navigation = useNavigation();
  return (
    <View style={styles.container}>
+
+    <Header />
     <Text style={styles.nome}>
       { user && user.nome}
     </Text>
