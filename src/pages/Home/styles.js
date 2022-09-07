@@ -25,6 +25,13 @@ const styles = StyleSheet.create({
         color: '#00b94a',
         marginBottom: 10
     },
+    list:{
+        paddingTop: 15,
+        backgroundColor: '#FFF',
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
+        marginHorizontal: 15
+    }
 })
 
 export default styles;

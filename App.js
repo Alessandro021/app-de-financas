@@ -20,6 +20,9 @@ console.disableYellowBox=true;
  * 
  * => icons
  * expo install react-native-vector-icons
+ *
+ * => picker
+ * npm install @react-native-picker/picker
  * 
  */
 
