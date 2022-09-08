@@ -24,6 +24,8 @@ console.disableYellowBox=true;
  * => picker
  * npm install @react-native-picker/picker
  * 
+ *  => date fns 
+ * npm install date-fns
  */
 
 export default function App() {
