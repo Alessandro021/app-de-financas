@@ -5,7 +5,7 @@ import Header from '../../components/Header/index';
 import styles from './styles';
 import HistoricoList from '../../components/HistoricoList';
 import firebase from '../../services/firebaseConnection';
-import { format, isPast } from 'date-fns'
+import { format, isBefore } from 'date-fns'
 
 export default function Home() {
 
@@ -23,7 +23,7 @@ export default function Home() {
 
       await firebase.database().ref('historico')
       .child(uid)
-      .orderByChild('date').equalTo(format(new Date, 'dd/MM/yy'))
+      .orderByChild('date').equalTo(format(new Date, 'dd/MM/yyyy'))
       .limitToLast(10).on('value', (snapshot) => {
         setHistorico([]);
 
@@ -43,7 +43,18 @@ export default function Home() {
   }, [])
 
   function handleDelete(data){
-    if(!isPast(new Date(data.date))){
+    //pegando data do item
+    const [diaItem, mesItem, anoItem ] = data.date.split('/')
+    const dateItem = new Date(`${anoItem}/${mesItem}/${diaItem}`);
+
+    //pegando data de hoje
+
+    const formatDiaHoje = format(new Date(), 'dd/MM/yyyy');
+    const [ diaHoje, mesHoje, anoHoje] = formatDiaHoje.split('/');
+    const dateHoje = new Date(`${anoHoje}/${mesHoje}/${diaHoje}`);
+  
+
+    if(isBefore(dateItem, dateHoje)){
       alert("Você não pode excluir um registro antigo!")
       return;
     }
