@@ -6,7 +6,8 @@ import { View,
   TextInput, 
   KeyboardAvoidingView, // esse componente faz com que o teclado nao fique por cima do input
   TouchableOpacity,
-  Platform
+  Platform,
+  ActivityIndicator
 } from 'react-native';
 import { AuthContext } from '../../contexts/auth';
 
@@ -19,7 +20,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('');
   const [nome, setNome] = useState('');
 
-  const { signUp } = useContext(AuthContext);
+  const { signUp, loadingAuth } = useContext(AuthContext);
 
   function handleSignUp(){
     signUp(email, password, nome)
@@ -67,7 +68,14 @@ export default function SignIn() {
         <TouchableOpacity style={styles.btnsubmit}
         onPress={handleSignUp}
         >
-          <Text style={styles.btnText}>Cadastrar</Text>
+          {
+            loadingAuth ? (
+              < ActivityIndicator size={20} color='#FFF'/>
+            ) : 
+            (
+              <Text style={styles.btnText}>Cadastrar</Text>
+            )
+          }
         </TouchableOpacity>
         
       </KeyboardAvoidingView>

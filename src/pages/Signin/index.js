@@ -6,7 +6,8 @@ import { View,
   TextInput, 
   KeyboardAvoidingView, // esse componente faz com que o teclado nao fique por cima do input
   TouchableOpacity,
-  Platform
+  Platform,
+  ActivityIndicator
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import styles from './styles'
@@ -17,7 +18,7 @@ export default function SignIn() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signIn } = useContext(AuthContext)
+  const { signIn, loadingAuth } = useContext(AuthContext)
 
   function handleLogin(){
     signIn(email, password)
@@ -56,7 +57,14 @@ export default function SignIn() {
         <TouchableOpacity style={styles.btnsubmit}
         onPress={handleLogin}
         >
+          {
+            loadingAuth ? (
+              < ActivityIndicator size={20} color='#FFF'/>
+            ) : (
           <Text style={styles.btnText}>Acessar</Text>
+
+            )
+          }
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.btnLink}
