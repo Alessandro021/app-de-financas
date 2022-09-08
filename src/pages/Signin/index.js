@@ -41,6 +41,7 @@ export default function SignIn() {
           autoCapitalize='none' // nao começa com a primeira letra maiuscula
           value={email}
           onChangeText={(email) => setEmail(email)}
+          keyboardType='email-address'
           />
         </View>
         <View style={[styles.areaInput]}>
@@ -51,6 +52,7 @@ export default function SignIn() {
           autoCapitalize='none' // nao começa com a primeira letra maiuscula
           value={password}
           onChangeText={(password) => setPassword(password)}
+          secureTextEntry={true} //esconde os caracteres das senha digitada
           />
         </View>
 

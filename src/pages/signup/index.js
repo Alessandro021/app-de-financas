@@ -37,9 +37,10 @@ export default function SignIn() {
           placeholder='Nome'
           placeholderTextColor="#FFFFFF"
           autoCorrect={false}
-          autoCapitalize='none' // nao começa com a primeira letra maiuscula
+          autoCapitalize='sentences' // nao começa com a primeira letra maiuscula
           value={nome}
           onChangeText={(nome) => setNome(nome)}
+          keyboardType='name-phone-pad'
           />
         </View>
 
@@ -51,6 +52,7 @@ export default function SignIn() {
           autoCapitalize='none' // nao começa com a primeira letra maiuscula
           value={email}
           onChangeText={(email) => setEmail(email)}
+          keyboardType='email-address'          
           />
         </View>
 
@@ -62,6 +64,7 @@ export default function SignIn() {
           autoCapitalize='none' // nao começa com a primeira letra maiuscula
           value={password}
           onChangeText={(password) => setPassword(password)}
+          secureTextEntry={true} //esconde os caracteres das senha digitada
           />
         </View>
 
