@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableWithoutFeedback} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather'
 import styles from './styles';
 
-export default function HistoricoList({data}) {
+export default function HistoricoList({data, deleteItem}) {
  return (
+    <TouchableWithoutFeedback
+        onLongPress={() => deleteItem(data)}
+    >
    <View style={styles.container}>
         <View style={styles.tipo}>
             <View style={[styles.iconView, data.tipo === 'despesa'? {backgroundColor: '#c62c36'}: {backgroundColor: '#049301'}]}>
@@ -20,5 +23,6 @@ export default function HistoricoList({data}) {
             R$ {data.valor}
         </Text>
    </View>
+   </TouchableWithoutFeedback>
   );
 }
