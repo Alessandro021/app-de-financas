@@ -26,6 +26,9 @@ console.disableYellowBox=true;
  * 
  *  => date fns 
  * npm install date-fns
+ * 
+ *  => date time picker
+ *  npm install @react-native-community/datetimepicker
  */
 
 export default function App() {

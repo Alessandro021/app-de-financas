@@ -1,11 +1,15 @@
 import React, { useContext, useState, useEffect} from 'react';
-import { View, Text, FlatList, Alert } from 'react-native';
+import { View, Text, FlatList, Alert, TouchableOpacity, Platform } from 'react-native';
 import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header/index';
 import styles from './styles';
 import HistoricoList from '../../components/HistoricoList';
 import firebase from '../../services/firebaseConnection';
 import { format, isBefore } from 'date-fns'
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
+import DatePicker from '../../components/DatePicker';
 
 export default function Home() {
 
@@ -15,6 +19,9 @@ export default function Home() {
 
   const uid = user && user.uid;
 
+  const [ newDate, setNewDate] = useState( new Date());
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     async function loadList(){
       await firebase.database().ref('users').child(uid).on('value', (snapshot) =>{
@@ -23,7 +30,7 @@ export default function Home() {
 
       await firebase.database().ref('historico')
       .child(uid)
-      .orderByChild('date').equalTo(format(new Date, 'dd/MM/yyyy'))
+      .orderByChild('date').equalTo(format(newDate, 'dd/MM/yyyy'))
       .limitToLast(10).on('value', (snapshot) => {
         setHistorico([]);
 
@@ -40,7 +47,7 @@ export default function Home() {
       })
     }
     loadList();
-  }, [])
+  }, [newDate])
 
   function handleDelete(data){
     //pegando data do item
@@ -90,6 +97,19 @@ export default function Home() {
     })
   }
 
+    function handleShowPicker(){
+      setShow(true)
+    }
+
+    function handleClose(){
+      setShow(false)
+    }
+
+    const onChange = (date) => {
+        setShow(Platform.OS === 'ios')
+        setNewDate(date)
+    }
+
  return (
    <View style={styles.background}>
       <Header />
@@ -99,7 +119,14 @@ export default function Home() {
            <Text style={styles.saldo}>R$ {saldo.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}</Text>
         </View>
 
-        <Text style={styles.title}>Ultimas movimentações</Text>
+        <View style={styles.area}>
+          <TouchableOpacity
+            onPress={handleShowPicker}
+          >
+            <MaterialIcons name='event' color='#FFF' size={30}/>
+          </TouchableOpacity>
+          <Text style={styles.title}>Ultimas movimentações</Text>
+        </View>
 
         <FlatList style={styles.list}
         showsHorizontalScrollIndicator={false}
@@ -107,6 +134,16 @@ export default function Home() {
         keyExtractor={(item) => item.key}
         renderItem={({item}) => (<HistoricoList data={item} deleteItem={handleDelete}/>)}
          />
+
+         {
+          show && (
+            <DatePicker 
+              onClose={handleClose}
+              date={newDate}
+              onChange={onChange}
+            />
+          )
+         }
 
    </View>
   );

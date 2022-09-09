@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
         color: '#00b94a',
         marginBottom: 10
     },
+    area:{
+        flexDirection: "row",
+        alignItems: "center",
+        marginLeft: 20,
+        marginBottom: 20,
+    },
     list:{
         paddingTop: 15,
         backgroundColor: '#FFF',
