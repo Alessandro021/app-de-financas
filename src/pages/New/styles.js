@@ -10,7 +10,8 @@ const styles =  StyleSheet.create({
         width: "90%",
         backgroundColor: '#FFFFF1',
         marginTop: 30,
-        fontSize: 18
+        fontSize: 18,
+        paddingLeft: 10
     },
     submitButton:{
         height: 60,
