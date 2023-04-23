@@ -3,7 +3,7 @@ import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Keyboard, Toucha
 import Header from '../../components/Header/index'
 import styles from './styles';
 import Picker from '../../components/Picker';
-import firebase from '../../services/firebaseConnection'
+import firebase from '../../server/firebaseConection'
 import { format } from 'date-fns'
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth'
@@ -41,7 +41,7 @@ export default function New() {
 
   async function handleAdd(){
     let uid = usuario.uid;
-    let key = await firebase.database().ref('historico').child(uid).push().key
+    let key = firebase.database().ref('historico').child(uid).push().key
     await firebase.database().ref('historico').child(uid).child(key).set({
       tipo: tipo,
       valor: parseFloat(valor),

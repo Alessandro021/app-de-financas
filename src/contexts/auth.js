@@ -1,7 +1,7 @@
-import React, { useState, createContext, useEffect} from "react";
-//criar um contexto
-import firebase from '../services/firebaseConnection'
-import { AsyncStorage } from "react-native";
+import firebase from "../server/firebaseConection";
+import { useState,createContext, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const AuthContext = createContext({});
@@ -11,15 +11,19 @@ export default function AuthProvider({ children}){
     const [ user, setUser] = useState(null)
     const [loading, setLoading] = useState(true);
     const [loadingAuth, setLoadingAuth] = useState(false);
+    const navigation = useNavigation();
+
 
     useEffect(() =>{
         async function loadStorage(){
-            const storageUser = await AsyncStorage.getItem('Auth_user')
+            const storageUser = await AsyncStorage.getItem('@USER')
 
             if(storageUser){
+
                 setUser(JSON.parse(storageUser))
                 setLoading(false)
             }
+
             setLoading(false)
         }
 
@@ -51,7 +55,6 @@ export default function AuthProvider({ children}){
         })
     }
 
-
     //cadastrar usuario
     async function signUp(email, password, nome){
         setLoadingAuth(true)
@@ -62,20 +65,13 @@ export default function AuthProvider({ children}){
                 saldo: 0,
                 nome: nome
             })
-            .then(()=>{
-                let data = {
-                    uid: uid,
-                    nome: nome,
-                    email: value.user.email,
-                }
-                setUser(data)
-                storageUser(data)
-                setLoadingAuth(false)
 
-            })
+            navigation.navigate('SigIn');
+            setLoadingAuth(false)
             
         })
         .catch((error)=>{
+            console.log("deu errado")
             alert(error.code)
             setLoadingAuth(false)
 
@@ -83,7 +79,7 @@ export default function AuthProvider({ children}){
     }
 
     async function storageUser(data){
-        await AsyncStorage.setItem('Auth_user', JSON.stringify(data))
+        await AsyncStorage.setItem('@USER', JSON.stringify(data))
     }
 
     async function signOut(){

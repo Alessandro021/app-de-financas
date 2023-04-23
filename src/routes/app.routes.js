@@ -4,6 +4,7 @@ import Home from '../pages/Home/index'
 import Profile from '../pages/Profile/index';
 import New from '../pages/New/index';
 import CustomDrower from "../components/CustomDrower";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const AppDrawer = createDrawerNavigator();
 
@@ -13,6 +14,10 @@ export default function AppRoutes(){
 
         drawerContent={ (props) => <CustomDrower {...props} />}
         screenOptions={{
+            gestureDirection: "horizontal",
+                cardStyleInterpolator:
+                    CardStyleInterpolators.forHorizontalIOS,
+
             drawerStyle: {
                 backgroundColor: "#171717",
                 fontWeight: 'bold'

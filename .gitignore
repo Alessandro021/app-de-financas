@@ -14,7 +14,7 @@ build/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
-*.xccheckout
+*.xccheckoutc
 *.moved-aside
 DerivedData
 *.hmap
@@ -37,6 +37,7 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+.env
 
 # BUCK
 buck-out/

@@ -1,13 +1,19 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignIn from '../pages/Signin/index'
 import SignUp from "../pages/signup/index";
+import { CardStyleInterpolators, createStackNavigator } from "@react-navigation/stack";
 
-const AuthStack = createNativeStackNavigator();
+// const AuthStack = createNativeStackNavigator();
+const AuthStack = createStackNavigator();
 
 export default function AuthRoutes(){
     return(
-        <AuthStack.Navigator>
+        <AuthStack.Navigator
+            screenOptions={{
+                cardStyleInterpolator:
+                    CardStyleInterpolators.forNoAnimation,
+            }}
+        >
             <AuthStack.Screen 
             name="SigIn"
             component={SignIn}
@@ -21,7 +27,7 @@ export default function AuthRoutes(){
                 headerStyle:{
                     backgroundColor: '#131313',
                     borderBottomWidth: 1,
-                    borderBottomColor: '#00b94a'
+                    borderBottomColor: '#00b94a',
                 },
                 headerTintColor: '#FFF',
                 headerBackTitleVisible: false,

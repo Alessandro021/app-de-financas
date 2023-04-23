@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/auth';
 import Header from '../../components/Header/index';
 import styles from './styles';
 import HistoricoList from '../../components/HistoricoList';
-import firebase from '../../services/firebaseConnection';
+import firebase from '../../server/firebaseConection';
 import { format, isBefore } from 'date-fns'
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -61,10 +61,10 @@ export default function Home() {
     const dateHoje = new Date(`${anoHoje}/${mesHoje}/${diaHoje}`);
   
 
-    if(isBefore(dateItem, dateHoje)){
-      alert("Você não pode excluir um registro antigo!")
-      return;
-    }
+    // if(isBefore(dateItem, dateHoje)){
+    //   alert("Você não pode excluir um registro antigo!")
+    //   return;
+    // }
 
     Alert.alert(
       'Cuidado Atenção!',
@@ -133,6 +133,7 @@ export default function Home() {
         data={historico}
         keyExtractor={(item) => item.key}
         renderItem={({item}) => (<HistoricoList data={item} deleteItem={handleDelete}/>)}
+        ListEmptyComponent={<Text style={styles.listaVazia}>Não ha nenhuma receita na aqui...</Text>}
          />
 
          {

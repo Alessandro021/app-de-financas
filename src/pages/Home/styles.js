@@ -37,7 +37,15 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
         marginHorizontal: 15
-    }
+    },
+    listaVazia:{
+        // flex: 1,
+        marginTop: 200,
+        textAlign: 'center',
+        fontSize: 20,
+        fontWeight: "bold" 
+        
+    },
 })
 
 export default styles;
